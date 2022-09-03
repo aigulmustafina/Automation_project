@@ -1,6 +1,7 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
+
 class ProductPage(BasePage):
 
     def should_be_product_page(self):
@@ -34,3 +35,11 @@ class ProductPage(BasePage):
         price = self.browser.find_element(*ProductPageLocators.PRICE)
         price_in_cart = self.browser.find_element(*ProductPageLocators.PRICE_IN_CART)
         assert price.text == price_in_cart.text
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MSG),\
+            'Success message is presented, but not should be'
+
+    def should_disapear_success_message(self):
+        assert self.is_disapeared(*ProductPageLocators.SUCCESS_MSG),\
+            'Success message is presented, but not should be'
